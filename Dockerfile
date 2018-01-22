@@ -12,6 +12,8 @@ WORKDIR /var/www
 RUN curl -sL https://repository.rainloop.net/installer.php | php
 RUN rm /etc/nginx/conf.d/default.conf
 RUN sed -i "s/user nginx;/daemon off;\n\nuser nginx;/" /etc/nginx/nginx.conf
+RUN sed -i "s/post_max_size = 8M/post_max_size = 25M/" /etc/php7/php.ini
+RUN sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 25M/" /etc/php7/php.ini
 COPY rainloop.conf /etc/nginx/conf.d/
 COPY run.sh /root/
 
